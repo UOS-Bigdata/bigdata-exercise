@@ -1,0 +1,13 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+format: jb-book
+root: intro
+chapters:
+- file: exercise  
+  sections:
+  - file: notes/dataframe_exercise_01 
+  - file: notes/dataframe_exercise_02
+- file: hw 
+  sections:
+  - file: notes/hw-01-ans
+
