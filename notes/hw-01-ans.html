@@ -1,0 +1,1236 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>빅데이터개론2 과제 1 - 답안 &#8212; 빅데이터 개론 2 - 연습 노트북과 과제 해답</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="과제 해딥 노트북" href="../hw.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">빅데이터 개론 2 - 연습 노트북과 과제 해답</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    빅데이터 개론 2 - 연습 및 과제 해답
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../exercise.html">
+   연습노트북
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dataframe_exercise_01.html">
+     Pandas 데이터프레임 연습 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dataframe_exercise_02.html">
+     Pandas 데이터프레임 연습 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../hw.html">
+   과제 해딥 노트북
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     빅데이터개론2 과제 1 - 답안
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/UOS-Bigdata/bigdatabook/master?urlpath=tree/notes/hw-01-ans.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/UOS-Bigdata/bigdatabook/blob/master/notes/hw-01-ans.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/UOS-Bigdata/bigdatabook"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notes/hw-01-ans.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   1. 표현식
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   2.숫자와 행렬
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3. 문자열
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   4. 데이터프레임
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>빅데이터개론2 과제 1 - 답안</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   1. 표현식
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   2.숫자와 행렬
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3. 문자열
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   4. 데이터프레임
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>빅데이터개론2 과제 1 - 답안<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>각 문제를 읽고 주어진 코드셀에 제시된 변수에 결과를 입력하거나, 주어진 텍스트셀에 답안을 입력하여 제출하세요.</p>
+<p>아래는 필요한 라이브러리를 불러오는 코드셀입니다. 반드시 숙제를 시작할 때 먼저 실행시키고 문제에서 적절하게 이용하세요.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>제출기한 : 2022년 10월 6일 23시 59분</strong></p>
+<p><strong>다음은 과제의 수행과 제출에 대한 안내입니다.</strong></p>
+<ul class="simple">
+<li><p>빅데이터개론2 과제는 모두 Colab의 공유 기능을 이용하여 제출하게 됩니다. 자세한 제출방법은 강의시간(또는 동영상)에 알려줄 것입니다.</p></li>
+<li><p>제출시 노트북의 이름(화일명)에서 성명과 학번을 자신의 이름과 학번으로 바꾼 후에 제출해야 합니다.</p>
+<ul>
+<li><p>(예: <strong><code class="docutils literal notranslate"><span class="pre">빅데이터개론2_2022F_과제-01-홍길동-12345677.ipynb</span></code></strong>)</p></li>
+</ul>
+</li>
+<li><p><strong>답을 입력하는 셀에 있는 <code class="docutils literal notranslate"><span class="pre">...</span></code>는 지우고 답 또는 표현식을 입력하세요.</strong></p></li>
+<li><p><strong>과제의 코드셀과 텍스트셀의 내용 또는 순서를 변경하지 마세요.</strong></p></li>
+<li><p>과제 노트북의 복사본을 만들거나 다른 노트북을 생성하여 연습할 것을 강력히 권고합니다.</p></li>
+</ul>
+<section id="id2">
+<h2>1. 표현식<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p><strong>문제 1</strong></p>
+<p>다음 중 오류가 나는 표현식을 선택하세요. 답은 아래 변수 <code class="docutils literal notranslate"><span class="pre">exp_ans_1</span></code> 에 1,2,3,4 중 한 숫자로 입력하세요.</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">&quot;1&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">1.3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;1&quot;</span> <span class="pre">+</span> <span class="pre">&quot;A&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">100</span></code></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exp_ans_1</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>정수형 변수와 문자형 변수는 더할 수 없다!!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="s2">&quot;1&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [3],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="mi">1</span><span class="o">+</span><span class="s2">&quot;1&quot;</span>
+
+<span class="ne">TypeError</span>: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>문자열 변수를 더하면 문자열을 연결하여 새로운 문자열을 만들어 준다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;1&quot;</span> <span class="o">+</span> <span class="s2">&quot;A&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;1A&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>문제 2</strong></p>
+<p>아래 코드가 실행되었다고 하자.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>다음 표현식의 결과는 무었인지 선택하시오. 답은 아래 변수 <code class="docutils literal notranslate"><span class="pre">exp_ans_2</span></code> 에 1,2,3,4 중 한 숫자로 입력하세요.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">b</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">3</span></code></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exp_ans_2</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span>
+<span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>문제 3</strong></p>
+<p>위 문제 2 에서 제시된 코드가 실행되었을 때 다음 표현식의 결과는 무었인지 선택하시오. 답은 아래 변수 <code class="docutils literal notranslate"><span class="pre">exp_ans_3</span></code> 에 1,2,3,4 중 한 숫자로 입력하세요.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[1</span> <span class="pre">,2,</span> <span class="pre">3,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">b]</span></code></p></li>
+<li><p>오류</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exp_ans_3</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 1, 2, 3]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h2>2.숫자와 행렬<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p><strong>문제 1</strong></p>
+<p>다음 코드를 수행하면 오류가 발생한다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">print</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>그 이유는 변수 <code class="docutils literal notranslate"><span class="pre">x</span></code> 형식과  <code class="docutils literal notranslate"><span class="pre">100</span></code> 의 형식은 더하는(<code class="docutils literal notranslate"><span class="pre">+</span></code>) 연산을 수행할 수 없기 떄문이다.</p>
+<p>변수 <code class="docutils literal notranslate"><span class="pre">x</span></code> 의 형식(type)을 알아내서 문자열로 <code class="docutils literal notranslate"><span class="pre">num_ans_1</span></code> 에 입력하세오</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_ans_1</span> <span class="o">=</span> <span class="s2">&quot;NoneType&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [10],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;x&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">print</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [11],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">print</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">100</span>
+
+<span class="ne">TypeError</span>: unsupported operand type(s) for +: &#39;NoneType&#39; and &#39;int&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>NoneType 은 <strong>값이 없다</strong> 라는 의미를 가지는 자료의 형식입니다.  <code class="docutils literal notranslate"><span class="pre">print(100)</span></code> 은 100이라는 숫자를 우리가 볼 수 있게 출력해주는 기능만 수행합니다. 따라서 <code class="docutils literal notranslate"><span class="pre">x</span></code> 에는 아무 값도 저장되지 않아 형식이 <code class="docutils literal notranslate"><span class="pre">NonType</span></code> 이 되는 것입니다.</p>
+<p><strong>문제 2</strong></p>
+<p>다음과 같은 행렬의 형태와 원소를 가지는 행렬을 라이브러리<code class="docutils literal notranslate"><span class="pre">numpy</span></code>의 행렬 형식으로 정의하여 변수 <code class="docutils literal notranslate"><span class="pre">num_ans_2</span></code>에 입력하세요.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+1 &amp; 2 &amp; 3 &amp; 4\\
+4 &amp; 1 &amp; 2 &amp; 3\\
+3 &amp; 4 &amp; 1 &amp; 2\\
+2 &amp; 3 &amp; 4 &amp; 1
+\end{pmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_ans_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_ans_2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 2, 3, 4],
+       [4, 1, 2, 3],
+       [3, 4, 1, 2],
+       [2, 3, 4, 1]])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>문제 3</strong></p>
+<p>위의 문제 2에서 정의된 행렬에서 다음과 같은 결과를 얻으려면 어떤 표현식을 입력해야 하는가?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+2 &amp; 3 \\
+1 &amp; 2 \\
+4 &amp; 1  
+\end{pmatrix}
+\end{split}\]</div>
+<p>문제에 대한 적절한 표현식을 정하고 변수 <code class="docutils literal notranslate"><span class="pre">num_ans_3</span></code> 에 입력하세요 (표현식에서 앞의 문제 2 의 변수 <code class="docutils literal notranslate"><span class="pre">num_ans_2</span></code>를 사용하세요)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_ans_3</span> <span class="o">=</span> <span class="n">num_ans_2</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_ans_3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2, 3],
+       [1, 2],
+       [4, 1]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h2>3. 문자열<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p><strong>문제 1</strong></p>
+<p>우리가 글자를 컴퓨터에 입력하는 경우 공백은 공백키(space bar)를 누른다. 하나의 공백(space)으로 시작하는 문자열은 문자 <code class="docutils literal notranslate"><span class="pre">$</span></code> 로 시작하는 문자열보다 순서가 뒤에 있는가?</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ol>
+<p>답은 아래 변수 <code class="docutils literal notranslate"><span class="pre">chr_ans_1</span></code> 에 1,2 중 하나를 입력하세요.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chr_ans_1</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;$&#39;</span> <span class="o">&lt;</span> <span class="s1">&#39; &#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;$t45&#39;</span> <span class="o">&lt;</span> <span class="s1">&#39; A43s&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>문제 2</strong></p>
+<p>아래의 코드가 실행되었다고 하자.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="s2">&quot;폭넓은 교양과 심오한 학문적 이론 및 창의적 전문기술을 지닌 지성인을 기른다. 성실한 근면을 바탕으로 책임과 의무를 다하는 건전한 인격을 갖춘 민주 시민을 기른다.&quot;</span>
+</pre></div>
+</div>
+<p>위와 같이 변수 <code class="docutils literal notranslate"><span class="pre">m</span></code> 에  저장된 문자열에서  문자 <code class="docutils literal notranslate"><span class="pre">을</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">를</span></code> 이 나타나는 총 횟수를
+아래 변수 <code class="docutils literal notranslate"><span class="pre">chr_ans_2</span></code> 에 저장할 수 있도록 표현식을 완성하시오.</p>
+<p>[힌트] 문자열에 적용되는 메소드 <code class="docutils literal notranslate"><span class="pre">count()</span></code> 를 사용할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chr_ans_2</span> <span class="o">=</span> <span class="mi">6</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="s2">&quot;폭넓은 교양과 심오한 학문적 이론 및 창의적 전문기술을 지닌 지성인을 기른다. 성실한 근면을 바탕으로 책임과 의무를 다하는 건전한 인격을 갖춘 민주 시민을 기른다.&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;을&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;를&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>문제 3</strong></p>
+<p>다음과 같은 문자열을 저장할 수 있도록 아래 변수 <code class="docutils literal notranslate"><span class="pre">chr_ans_3</span></code>에 적절한 문자열을 입력하세요</p>
+<p><code class="docutils literal notranslate"><span class="pre">그는</span> <span class="pre">&quot;빨리</span> <span class="pre">오세요&quot;</span> <span class="pre">라고</span> <span class="pre">외쳤다.</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chr_ans_3</span> <span class="o">=</span>  <span class="s2">&quot;그는 </span><span class="se">\&quot;</span><span class="s2">빨리 오세요</span><span class="se">\&quot;</span><span class="s2"> 라고 외쳤다.&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chr_ans_3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;그는 &quot;빨리 오세요&quot; 라고 외쳤다.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>문제 4</strong></p>
+<p>다음과 같은 디렉토리 이름이 저장될 수 있도록 아래 변수 <code class="docutils literal notranslate"><span class="pre">chr_ans_4</span></code>에 적절한 문자열을 입력하세요</p>
+<p><code class="docutils literal notranslate"><span class="pre">D:\home\statistics\normal</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chr_ans_4</span>  <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;D:\home\statistics\normal&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chr_ans_4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;D:\\home\\statistics\\normal&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">chr_ans_4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>D:\home\statistics\normal
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>문제 5</strong></p>
+<p>다음과 같은 코드가 실행되었다고 하자.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="s1">&#39;하&#39;</span>
+<span class="n">j</span> <span class="o">=</span> <span class="s1">&#39;웃으셨다&#39;</span>
+<span class="n">k</span> <span class="o">=</span> <span class="s1">&#39;아버지가&#39;</span>
+<span class="n">l</span> <span class="o">=</span> <span class="s1">&#39;크게&#39;</span>
+<span class="n">p</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span>
+</pre></div>
+</div>
+<p>다음 표현식의 결과가 무었인지 선택하시오.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">+</span> <span class="n">p</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">p</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="n">p</span> <span class="o">+</span> <span class="n">l</span>
+</pre></div>
+</div>
+<p>답은 아래 변수 <code class="docutils literal notranslate"><span class="pre">chr_ans_5</span></code> 에 1,2,3,4 중 한 숫자로 입력하세요.</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">아버지가</span> <span class="pre">하하하</span> <span class="pre">웃으셨다</span> <span class="pre">크게</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">아버지가</span> <span class="pre">하하하</span> <span class="pre">크게</span> <span class="pre">웃으셨다</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">아버지가</span> <span class="pre">크게</span> <span class="pre">하하하</span> <span class="pre">웃우셨다</span></code></p></li>
+<li><p>오류</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chr_ans_5</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="s1">&#39;하&#39;</span>
+<span class="n">j</span> <span class="o">=</span> <span class="s1">&#39;웃으셨다&#39;</span>
+<span class="n">k</span> <span class="o">=</span> <span class="s1">&#39;아버지가&#39;</span>
+<span class="n">l</span> <span class="o">=</span> <span class="s1">&#39;크게&#39;</span>
+<span class="n">p</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">+</span> <span class="n">p</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">p</span> <span class="o">+</span> <span class="n">j</span> <span class="o">+</span> <span class="n">p</span> <span class="o">+</span> <span class="n">l</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;아버지가 하하하 웃으셨다 크게&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h2>4. 데이터프레임<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<p>다음은 온라인교과서의  데이터프레임의 정의와 구성요소에 데이터프레임을 만드는 코드이다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;이철수&#39;</span><span class="p">,</span> <span class="s1">&#39;김영희&#39;</span><span class="p">,</span> <span class="s1">&#39;홍길동&#39;</span><span class="p">,</span> <span class="s1">&#39;John Smith&#39;</span><span class="p">,</span> <span class="s1">&#39;Mary Doe&#39;</span><span class="p">],</span>
+      <span class="s1">&#39;sex&#39;</span>  <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+      <span class="s1">&#39;age&#39;</span>  <span class="p">:</span> <span class="p">[</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span>
+      <span class="s1">&#39;height&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">153.5</span><span class="p">,</span> <span class="mf">175.3</span><span class="p">,</span> <span class="mf">163.4</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">,</span> <span class="mf">165.7</span><span class="p">]</span>
+    <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>위의 코드가 실행되었다고 가정하고 아래 문제 1 - 문제 2 번까지 답하시오.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;이철수&#39;</span><span class="p">,</span> <span class="s1">&#39;김영희&#39;</span><span class="p">,</span> <span class="s1">&#39;홍길동&#39;</span><span class="p">,</span> <span class="s1">&#39;John Smith&#39;</span><span class="p">,</span> <span class="s1">&#39;Mary Doe&#39;</span><span class="p">],</span>
+      <span class="s1">&#39;sex&#39;</span>  <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+      <span class="s1">&#39;age&#39;</span>  <span class="p">:</span> <span class="p">[</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span>
+      <span class="s1">&#39;height&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">153.5</span><span class="p">,</span> <span class="mf">175.3</span><span class="p">,</span> <span class="mf">163.4</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">,</span> <span class="mf">165.7</span><span class="p">]</span>
+    <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>sex</th>
+      <th>age</th>
+      <th>height</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>이철수</td>
+      <td>M</td>
+      <td>23</td>
+      <td>153.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>김영희</td>
+      <td>F</td>
+      <td>25</td>
+      <td>175.3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>홍길동</td>
+      <td>M</td>
+      <td>21</td>
+      <td>163.4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>John Smith</td>
+      <td>M</td>
+      <td>33</td>
+      <td>180.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Mary Doe</td>
+      <td>F</td>
+      <td>45</td>
+      <td>165.7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>문제 1</strong></p>
+<p>위에서 정의된 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code> 에서 두 개의 열 <code class="docutils literal notranslate"><span class="pre">sex</span></code> 와 <code class="docutils literal notranslate"><span class="pre">age</span></code> 만 슬라이싱하여 아래 변수 <code class="docutils literal notranslate"><span class="pre">df_ans_</span></code> 에 저장하는 표현식을 완성하시오.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_ans_1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_ans_1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sex</th>
+      <th>age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>M</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>F</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>M</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>M</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>F</td>
+      <td>45</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>문제 2</strong></p>
+<p>데이터프레임 <code class="docutils literal notranslate"><span class="pre">df</span></code> 에서 여성이고 키가 170 이하인 사람 만으로 구성된 자료를 데이터프레임으로 만들려고 한다.</p>
+<p>적절한 표현식을 작성하여 결과를 아래 <code class="docutils literal notranslate"><span class="pre">df_ans_2</span></code> 에 저장히시요</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_ans_2</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;height&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">170</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_ans_2</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>sex</th>
+      <th>age</th>
+      <th>height</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>Mary Doe</td>
+      <td>F</td>
+      <td>45</td>
+      <td>165.7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>문제 3</strong></p>
+<p>다음과 같이 3개의 열을 가진 데이터프레임 <code class="docutils literal notranslate"><span class="pre">df_ans_3</span></code> 을 만드는 표현식을 아래 코드셀에 입력하시오.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="text-align:right head"><p>name</p></th>
+<th class="text-align:right head"><p>age</p></th>
+<th class="text-align:right head"><p>weight</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td class="text-align:right"><p>A</p></td>
+<td class="text-align:right"><p>12</p></td>
+<td class="text-align:right"><p>60.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td class="text-align:right"><p>B</p></td>
+<td class="text-align:right"><p>13</p></td>
+<td class="text-align:right"><p>75.3</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td class="text-align:right"><p>C</p></td>
+<td class="text-align:right"><p>14</p></td>
+<td class="text-align:right"><p>47.3</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_ans_3</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span> <span class="p">{</span>
+    <span class="s1">&#39;name&#39;</span> <span class="p">:</span> <span class="p">[</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span> <span class="p">],</span>
+     <span class="s1">&#39;age&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span> <span class="p">],</span>
+     <span class="s1">&#39;weight&#39;</span> <span class="p">:</span> <span class="p">[</span> <span class="mf">60.5</span><span class="p">,</span> <span class="mf">75.3</span><span class="p">,</span> <span class="mf">47.3</span><span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_ans_3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>12</td>
+      <td>60.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B</td>
+      <td>13</td>
+      <td>75.3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+      <td>14</td>
+      <td>47.3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../hw.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">과제 해딥 노트북</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 서울시립대학교<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
