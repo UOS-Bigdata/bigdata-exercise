@@ -1,0 +1,3364 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>자료의 분포 - 시각화와 요약 통계량 - 연습 &#8212; 빅데이터 개론 2 - 연습 노트북과 과제 해답</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="과제 해딥 노트북" href="../hw.html" />
+    <link rel="prev" title="Pandas 데이터프레임 연습 2" href="dataframe_exercise_02.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">빅데이터 개론 2 - 연습 노트북과 과제 해답</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    빅데이터 개론 2 - 연습 및 과제 해답
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../exercise.html">
+   연습노트북
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="dataframe_exercise_01.html">
+     Pandas 데이터프레임 연습 1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="dataframe_exercise_02.html">
+     Pandas 데이터프레임 연습 2
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     자료의 분포 - 시각화와 요약 통계량 - 연습
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hw.html">
+   과제 해딥 노트북
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hw-01-ans.html">
+     빅데이터개론2 과제 1 - 답안
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/UOS-Bigdata/bigdata-exercise/master?urlpath=tree/notes/distribution_exercise_01.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/UOS-Bigdata/bigdata-exercise/blob/master/notes/distribution_exercise_01.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/UOS-Bigdata/bigdata-exercise"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notes/distribution_exercise_01.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   1. 자료불러오기
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     서울시 공공 자전거 대여 이력 자료 불러 오기
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     서울시 공공 자전거 대여소 정보 자료 불러오기
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   2. 자료의 결합
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   3. 구별 대여 횟수 비교
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   4. 자전거 이용시간 및 거리 분석
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   5. 구별 자전거 이용시간 및 거리 비교
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>자료의 분포 - 시각화와 요약 통계량 - 연습</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   1. 자료불러오기
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     서울시 공공 자전거 대여 이력 자료 불러 오기
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     서울시 공공 자전거 대여소 정보 자료 불러오기
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   2. 자료의 결합
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   3. 구별 대여 횟수 비교
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   4. 자전거 이용시간 및 거리 분석
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   5. 구별 자전거 이용시간 및 거리 비교
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>자료의 분포 - 시각화와 요약 통계량 - 연습<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>이 노트북은 자료의 분포에 대한 시각화를 이용한 탐색적 분석과 요약 통계량을 구하는 연습입니다.</p>
+<p>교과서에서 본 체력 측정자료에서 우리가 공부한 키, 몸무게와 같은 자료는 평균을 중심으로 대칭인 분포를 가지는 자료입니다.</p>
+<p>이번 연습에 사용될 자료는 서울특별시 공공자전거 대여 <a class="reference external" href="https://data.seoul.go.kr/dataList/OA-20447/A/1/datasetView.do">이력 자료</a>를 이용할 것입니다. <strong>분석할 변수는 자전거 이용 시간(<code class="docutils literal notranslate"><span class="pre">duration</span></code>, 분)과 거리(<code class="docutils literal notranslate"><span class="pre">distance</span></code>, m)</strong> 입니다. 시간과 거리의 분포는 체력 자료와 매우 다른 분포를 가지는 것을 볼 수 있습니다.</p>
+<p>먼저 분석에 필요한 라이브러리를 불러오고 한글 처리에 필요한 코드를 실행합니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 라이므러리 불러오기</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 그림 그리기를 위한 코드</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="c1"># clolab 에서 그림을 그릴 때 한글을 사용하려면 필요한 코드입니다. </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;NanumBarunGothic&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span> 
+
+<span class="c1"># 그림 크기 조정 </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>   
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id2">
+<h2>1. 자료불러오기<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>자료는 두 개의 화일로 구성됩니다. 자료는 <a class="reference external" href="https://data.seoul.go.kr/dataList/OA-15182/F/1/datasetView.do">서울시 열린데이터 광장 사이트</a>에서 다운로드받은 자료입니다.</p>
+<ul class="simple">
+<li><p>서울시 공공 자전거 대여 이력 자료(2019년 9월 한달 자료)</p></li>
+<li><p>서울시 공공 자전거 대여소 정보 자료 (2021년 6월의 대여서 현황자료)</p></li>
+</ul>
+<p><strong>참고</strong>: 최근 2020년 자료도 있지만 자료의 크기가 다소 크기 때문에 <code class="docutils literal notranslate"><span class="pre">colab</span></code> 을 이용할 시 시간이 오래 걸립니다. 관심있는 사람들은 최근자료를 다운로드 받아 아래 제시된 코드를 이용하여 실습해보세요.</p>
+<section id="id3">
+<h3>서울시 공공 자전거 대여 이력 자료 불러 오기<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>먼저 서울시 공공 자전거 대여 이력 자료를 불러 들여 데이터프레임 <code class="docutils literal notranslate"><span class="pre">bike0</span></code> 에 저장</p></li>
+<li><p>열이름을 영문으로 바꾸고 열이름에 대한 정보를 가진 데이터프레임 <code class="docutils literal notranslate"><span class="pre">col_info</span></code>를 생성</p></li>
+<li><p>대여시간에 대한 두 개의 변수를 시간 변수로 변환</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url1</span> <span class="o">=</span> <span class="s2">&quot;https://ilovedata.github.io/teaching/bigdata2/data/seoul_bike_201909_3.csv&quot;</span>
+<span class="n">bike0</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;CP949&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike0</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-bdcf7395-78e2-4977-aa4f-8d3d1dc678e7">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>자전거번호</th>
+      <th>대여일시</th>
+      <th>대여 대여소번호</th>
+      <th>대여 대여소명</th>
+      <th>대여거치대</th>
+      <th>반납일시</th>
+      <th>반납대여소번호</th>
+      <th>반납대여소명</th>
+      <th>반납거치대</th>
+      <th>이용시간</th>
+      <th>이용거리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SPB-17003</td>
+      <td>2019-09-28 16:10:55</td>
+      <td>368</td>
+      <td>SK 서린빌딩 앞</td>
+      <td>4</td>
+      <td>2019-09-28 17:03:32</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>14</td>
+      <td>52</td>
+      <td>8940.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SPB-14405</td>
+      <td>2019-09-28 16:48:16</td>
+      <td>2024</td>
+      <td>상도역 1번출구</td>
+      <td>3</td>
+      <td>2019-09-28 17:03:44</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>18</td>
+      <td>15</td>
+      <td>1910.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SPB-18431</td>
+      <td>2019-09-28 16:59:54</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>10</td>
+      <td>2019-09-28 17:03:57</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>10</td>
+      <td>2</td>
+      <td>30.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SPB-04853</td>
+      <td>2019-09-28 15:31:49</td>
+      <td>207</td>
+      <td>여의나루역 1번출구 앞</td>
+      <td>32</td>
+      <td>2019-09-28 17:10:12</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>19</td>
+      <td>98</td>
+      <td>9610.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SPB-11122</td>
+      <td>2019-09-28 15:35:41</td>
+      <td>207</td>
+      <td>여의나루역 1번출구 앞</td>
+      <td>14</td>
+      <td>2019-09-28 17:10:37</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>18</td>
+      <td>90</td>
+      <td>9450.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>SPB-23089</td>
+      <td>2019-09-28 17:02:37</td>
+      <td>2003</td>
+      <td>사육신공원앞</td>
+      <td>5</td>
+      <td>2019-09-28 17:13:44</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>10</td>
+      <td>10</td>
+      <td>1410.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>SPB-15669</td>
+      <td>2019-09-28 16:17:54</td>
+      <td>2213</td>
+      <td>고속터미널역 5번출구 앞</td>
+      <td>7</td>
+      <td>2019-09-28 17:14:22</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>8</td>
+      <td>56</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SPB-09727</td>
+      <td>2019-09-28 17:04:56</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>5</td>
+      <td>2019-09-28 17:17:10</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>17</td>
+      <td>11</td>
+      <td>380.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>SPB-10053</td>
+      <td>2019-09-28 16:59:45</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>3</td>
+      <td>2019-09-28 17:17:53</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>5</td>
+      <td>17</td>
+      <td>1080.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>SPB-14487</td>
+      <td>2019-09-28 16:01:41</td>
+      <td>2024</td>
+      <td>상도역 1번출구</td>
+      <td>5</td>
+      <td>2019-09-28 17:20:44</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>14</td>
+      <td>78</td>
+      <td>13870.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-bdcf7395-78e2-4977-aa4f-8d3d1dc678e7')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-bdcf7395-78e2-4977-aa4f-8d3d1dc678e7 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-bdcf7395-78e2-4977-aa4f-8d3d1dc678e7');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike0</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(407589, 11)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike0</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>자전거번호        object
+대여일시         object
+대여 대여소번호      int64
+대여 대여소명      object
+대여거치대         int64
+반납일시         object
+반납대여소번호       int64
+반납대여소명       object
+반납거치대         int64
+이용시간          int64
+이용거리        float64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">colnames_old</span> <span class="o">=</span> <span class="n">bike0</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">colnames_new</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bike_ID&quot;</span><span class="p">,</span> <span class="s2">&quot;time_start&quot;</span><span class="p">,</span><span class="s2">&quot;station_ID_start&quot;</span><span class="p">,</span> <span class="s2">&quot;station_name_start&quot;</span><span class="p">,</span> <span class="s2">&quot;spot_ID_start&quot;</span><span class="p">,</span> <span class="s2">&quot;time_end&quot;</span><span class="p">,</span> <span class="s2">&quot;station_ID_end&quot;</span><span class="p">,</span> <span class="s2">&quot;station_name_end&quot;</span><span class="p">,</span> <span class="s2">&quot;sopt_ID_end&quot;</span><span class="p">,</span><span class="s2">&quot;duration&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">col_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span> <span class="s1">&#39;col_korean&#39;</span><span class="p">:</span><span class="n">colnames_old</span> <span class="p">,</span> <span class="s1">&#39;col_english&#39;</span><span class="p">:</span><span class="n">colnames_new</span> <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">col_info</span> <span class="c1"># 열이름 정보를 가진 데이처프레임</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-351724ef-c435-4379-931e-92006403fdde">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>col_korean</th>
+      <th>col_english</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>자전거번호</td>
+      <td>bike_ID</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>대여일시</td>
+      <td>time_start</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>대여 대여소번호</td>
+      <td>station_ID_start</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>대여 대여소명</td>
+      <td>station_name_start</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>대여거치대</td>
+      <td>spot_ID_start</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>반납일시</td>
+      <td>time_end</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>반납대여소번호</td>
+      <td>station_ID_end</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>반납대여소명</td>
+      <td>station_name_end</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>반납거치대</td>
+      <td>sopt_ID_end</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>이용시간</td>
+      <td>duration</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>이용거리</td>
+      <td>distance</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-351724ef-c435-4379-931e-92006403fdde')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-351724ef-c435-4379-931e-92006403fdde button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-351724ef-c435-4379-931e-92006403fdde');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 열이름 바꾸기</span>
+<span class="n">bike0</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">colnames_new</span>
+<span class="c1"># 시간이 포함된 문자열의 형식을 시간형식으로 바꾸기   </span>
+<span class="n">bike0</span><span class="p">[</span><span class="s1">&#39;time_start&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">bike0</span><span class="p">[</span><span class="s1">&#39;time_start&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+<span class="n">bike0</span><span class="p">[</span><span class="s1">&#39;time_end&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">bike0</span><span class="p">[</span><span class="s1">&#39;time_end&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike0</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-18942f1a-1796-4c48-945e-3bd02030bbb4">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bike_ID</th>
+      <th>time_start</th>
+      <th>station_ID_start</th>
+      <th>station_name_start</th>
+      <th>spot_ID_start</th>
+      <th>time_end</th>
+      <th>station_ID_end</th>
+      <th>station_name_end</th>
+      <th>sopt_ID_end</th>
+      <th>duration</th>
+      <th>distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SPB-17003</td>
+      <td>2019-09-28 16:10:55</td>
+      <td>368</td>
+      <td>SK 서린빌딩 앞</td>
+      <td>4</td>
+      <td>2019-09-28 17:03:32</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>14</td>
+      <td>52</td>
+      <td>8940.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SPB-14405</td>
+      <td>2019-09-28 16:48:16</td>
+      <td>2024</td>
+      <td>상도역 1번출구</td>
+      <td>3</td>
+      <td>2019-09-28 17:03:44</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>18</td>
+      <td>15</td>
+      <td>1910.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SPB-18431</td>
+      <td>2019-09-28 16:59:54</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>10</td>
+      <td>2019-09-28 17:03:57</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>10</td>
+      <td>2</td>
+      <td>30.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SPB-04853</td>
+      <td>2019-09-28 15:31:49</td>
+      <td>207</td>
+      <td>여의나루역 1번출구 앞</td>
+      <td>32</td>
+      <td>2019-09-28 17:10:12</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>19</td>
+      <td>98</td>
+      <td>9610.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SPB-11122</td>
+      <td>2019-09-28 15:35:41</td>
+      <td>207</td>
+      <td>여의나루역 1번출구 앞</td>
+      <td>14</td>
+      <td>2019-09-28 17:10:37</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>18</td>
+      <td>90</td>
+      <td>9450.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>SPB-23089</td>
+      <td>2019-09-28 17:02:37</td>
+      <td>2003</td>
+      <td>사육신공원앞</td>
+      <td>5</td>
+      <td>2019-09-28 17:13:44</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>10</td>
+      <td>10</td>
+      <td>1410.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>SPB-15669</td>
+      <td>2019-09-28 16:17:54</td>
+      <td>2213</td>
+      <td>고속터미널역 5번출구 앞</td>
+      <td>7</td>
+      <td>2019-09-28 17:14:22</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>8</td>
+      <td>56</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>SPB-09727</td>
+      <td>2019-09-28 17:04:56</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>5</td>
+      <td>2019-09-28 17:17:10</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>17</td>
+      <td>11</td>
+      <td>380.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>SPB-10053</td>
+      <td>2019-09-28 16:59:45</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>3</td>
+      <td>2019-09-28 17:17:53</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>5</td>
+      <td>17</td>
+      <td>1080.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>SPB-14487</td>
+      <td>2019-09-28 16:01:41</td>
+      <td>2024</td>
+      <td>상도역 1번출구</td>
+      <td>5</td>
+      <td>2019-09-28 17:20:44</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>14</td>
+      <td>78</td>
+      <td>13870.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-18942f1a-1796-4c48-945e-3bd02030bbb4')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-18942f1a-1796-4c48-945e-3bd02030bbb4 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-18942f1a-1796-4c48-945e-3bd02030bbb4');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike0</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bike_ID                       object
+time_start            datetime64[ns]
+station_ID_start               int64
+station_name_start            object
+spot_ID_start                  int64
+time_end              datetime64[ns]
+station_ID_end                 int64
+station_name_end              object
+sopt_ID_end                    int64
+duration                       int64
+distance                     float64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>서울시 공공 자전거 대여소 정보 자료 불러오기<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>대여소 정보를 가진 자료(<code class="docutils literal notranslate"><span class="pre">seoul_bike_stations_202106.csv</span></code>)에는 대여소의 ID, 대여소 이름과 대여소가 있는 주소와 공간적 위치에 대한 정보로 구성되어 있습니다.</p>
+<p>자료는 <a class="reference external" href="https://data.seoul.go.kr/dataList/OA-13252/F/1/datasetView.do">서울시 열린데이터 광장 사이트</a>에서 다운로드 받은 자료입니다. 최근 자료도 다운로드 받을 수 있습니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url2</span> <span class="o">=</span> <span class="s2">&quot;https://ilovedata.github.io/teaching/bigdata2/data/seoul_bike_stations_202106.csv&quot;</span>
+<span class="n">bike_station00</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;CP949&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_station00</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-c95ce2b2-db06-4101-b689-a264a26da352">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>102</td>
+      <td>망원역 1번출구 앞</td>
+      <td>마포구</td>
+      <td>서울특별시 마포구 월드컵로 72</td>
+      <td>37.555649</td>
+      <td>126.910629</td>
+      <td>2015-09-06</td>
+      <td>20.0</td>
+      <td>NaN</td>
+      <td>LCD</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>103</td>
+      <td>망원역 2번출구 앞</td>
+      <td>마포구</td>
+      <td>서울특별시 마포구 월드컵로 79</td>
+      <td>37.554951</td>
+      <td>126.910835</td>
+      <td>2015-09-06</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>LCD</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>104</td>
+      <td>합정역 1번출구 앞</td>
+      <td>마포구</td>
+      <td>서울특별시 마포구 양화로 59</td>
+      <td>37.550629</td>
+      <td>126.914986</td>
+      <td>2015-09-06</td>
+      <td>13.0</td>
+      <td>NaN</td>
+      <td>LCD</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>105</td>
+      <td>합정역 5번출구 앞</td>
+      <td>마포구</td>
+      <td>서울특별시 마포구 양화로 48</td>
+      <td>37.550007</td>
+      <td>126.914825</td>
+      <td>2015-09-06</td>
+      <td>5.0</td>
+      <td>NaN</td>
+      <td>LCD</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>106</td>
+      <td>합정역 7번출구 앞</td>
+      <td>마포구</td>
+      <td>서울특별시 마포구 독막로 4</td>
+      <td>37.548645</td>
+      <td>126.912826</td>
+      <td>2015-09-06</td>
+      <td>10.0</td>
+      <td>NaN</td>
+      <td>LCD</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>107</td>
+      <td>신한은행 서교동금융센터점 앞</td>
+      <td>마포구</td>
+      <td>서울특별시 마포구 월드컵북로 35</td>
+      <td>37.557510</td>
+      <td>126.918503</td>
+      <td>2015-09-06</td>
+      <td>5.0</td>
+      <td>NaN</td>
+      <td>LCD</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>108</td>
+      <td>서교동 사거리</td>
+      <td>마포구</td>
+      <td>서울특별시 마포구 양화로 93</td>
+      <td>37.552746</td>
+      <td>126.918617</td>
+      <td>2015-09-06</td>
+      <td>10.0</td>
+      <td>NaN</td>
+      <td>LCD</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>109</td>
+      <td>제일빌딩 앞</td>
+      <td>마포구</td>
+      <td>서울특별시 마포구 어울마당로 26</td>
+      <td>37.547691</td>
+      <td>126.919983</td>
+      <td>2015-09-07</td>
+      <td>10.0</td>
+      <td>NaN</td>
+      <td>LCD</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>111</td>
+      <td>상수역 2번출구 앞</td>
+      <td>마포구</td>
+      <td>서울특별시 마포구 와우산로 40</td>
+      <td>37.547871</td>
+      <td>126.923531</td>
+      <td>2015-09-07</td>
+      <td>10.0</td>
+      <td>NaN</td>
+      <td>LCD</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>112</td>
+      <td>극동방송국 앞</td>
+      <td>마포구</td>
+      <td>서울특별시 마포구 와우산로 56</td>
+      <td>37.549202</td>
+      <td>126.923203</td>
+      <td>2015-09-07</td>
+      <td>10.0</td>
+      <td>NaN</td>
+      <td>LCD</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-c95ce2b2-db06-4101-b689-a264a26da352')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-c95ce2b2-db06-4101-b689-a264a26da352 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-c95ce2b2-db06-4101-b689-a264a26da352');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_station00</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2467, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<p>이제 대여소에 대한 정보가 있는 데이터프레임에 다음과 같은 작업을 적용하여 필요한 자료만 슬라이싱합니다.</p>
+<ol class="simple">
+<li><p>대여소 ID 와 행정구 이름, 2개의 열(열의 index는 0 과 2)을 선택하고 열이름을 영문으로 변경합니다.</p></li>
+<li><p>결과를 데이터프레임 <code class="docutils literal notranslate"><span class="pre">bike_station0</span></code> 으로 저장합니다.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_station0</span> <span class="o">=</span> <span class="n">bike_station00</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+<span class="n">bike_station0</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;station_ID_start&quot;</span><span class="p">,</span> <span class="s2">&quot;gu_name_start&quot;</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_station0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-b02ef513-49bf-4c9d-9072-b36a0d83c1f4">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>station_ID_start</th>
+      <th>gu_name_start</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>102</td>
+      <td>마포구</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>103</td>
+      <td>마포구</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>104</td>
+      <td>마포구</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>105</td>
+      <td>마포구</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>106</td>
+      <td>마포구</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2462</th>
+      <td>4864</td>
+      <td>송파구</td>
+    </tr>
+    <tr>
+      <th>2463</th>
+      <td>4865</td>
+      <td>송파구</td>
+    </tr>
+    <tr>
+      <th>2464</th>
+      <td>4867</td>
+      <td>송파구</td>
+    </tr>
+    <tr>
+      <th>2465</th>
+      <td>4868</td>
+      <td>송파구</td>
+    </tr>
+    <tr>
+      <th>2466</th>
+      <td>4869</td>
+      <td>송파구</td>
+    </tr>
+  </tbody>
+</table>
+<p>2467 rows × 2 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-b02ef513-49bf-4c9d-9072-b36a0d83c1f4')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-b02ef513-49bf-4c9d-9072-b36a0d83c1f4 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-b02ef513-49bf-4c9d-9072-b36a0d83c1f4');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+</section>
+<section id="id5">
+<h2>2. 자료의 결합<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>이제 공공자전거 대여 이력 정보를 가진 데이터프레임(<code class="docutils literal notranslate"><span class="pre">bike0</span></code>)와 대여소의 정보를 가진 데이터프레임(<code class="docutils literal notranslate"><span class="pre">bike_station0</span></code>)을 대여소(<code class="docutils literal notranslate"><span class="pre">station_ID_start</span></code>)를 기준으로 결합(merger)하여 새로운 데이터프레임 <code class="docutils literal notranslate"><span class="pre">bike1</span></code>을 만듭니다.</p></li>
+<li><p>필요한 변수만 선택하여 분석을 위한 최종 데이터프레임 <code class="docutils literal notranslate"><span class="pre">bike_final</span></code>를 만듭니다.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">bike0</span><span class="p">,</span> <span class="n">bike_station0</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span><span class="s2">&quot;station_ID_start&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span> <span class="p">)</span> 
+<span class="n">bike_final</span><span class="o">=</span> <span class="n">bike1</span><span class="p">[[</span><span class="s2">&quot;time_start&quot;</span><span class="p">,</span><span class="s2">&quot;station_ID_start&quot;</span><span class="p">,</span> <span class="s2">&quot;station_name_start&quot;</span><span class="p">,</span><span class="s2">&quot;gu_name_start&quot;</span><span class="p">,</span><span class="s2">&quot;time_end&quot;</span><span class="p">,</span> <span class="s2">&quot;station_ID_end&quot;</span><span class="p">,</span> <span class="s2">&quot;station_name_end&quot;</span><span class="p">,</span> <span class="s2">&quot;duration&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span> <span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-3c7175b9-9663-4f13-853a-cf086876397b">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>time_start</th>
+      <th>station_ID_start</th>
+      <th>station_name_start</th>
+      <th>gu_name_start</th>
+      <th>time_end</th>
+      <th>station_ID_end</th>
+      <th>station_name_end</th>
+      <th>duration</th>
+      <th>distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019-09-28 16:10:55</td>
+      <td>368</td>
+      <td>SK 서린빌딩 앞</td>
+      <td>종로구</td>
+      <td>2019-09-28 17:03:32</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>52</td>
+      <td>8940.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019-09-28 16:48:16</td>
+      <td>2024</td>
+      <td>상도역 1번출구</td>
+      <td>동작구</td>
+      <td>2019-09-28 17:03:44</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>15</td>
+      <td>1910.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-09-28 16:59:54</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>동작구</td>
+      <td>2019-09-28 17:03:57</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>2</td>
+      <td>30.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019-09-28 15:31:49</td>
+      <td>207</td>
+      <td>여의나루역 1번출구 앞</td>
+      <td>영등포구</td>
+      <td>2019-09-28 17:10:12</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>98</td>
+      <td>9610.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019-09-28 15:35:41</td>
+      <td>207</td>
+      <td>여의나루역 1번출구 앞</td>
+      <td>영등포구</td>
+      <td>2019-09-28 17:10:37</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>90</td>
+      <td>9450.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2019-09-28 17:02:37</td>
+      <td>2003</td>
+      <td>사육신공원앞</td>
+      <td>동작구</td>
+      <td>2019-09-28 17:13:44</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>10</td>
+      <td>1410.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2019-09-28 16:17:54</td>
+      <td>2213</td>
+      <td>고속터미널역 5번출구 앞</td>
+      <td>서초구</td>
+      <td>2019-09-28 17:14:22</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>56</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2019-09-28 17:04:56</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>동작구</td>
+      <td>2019-09-28 17:17:10</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>11</td>
+      <td>380.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2019-09-28 16:59:45</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>동작구</td>
+      <td>2019-09-28 17:17:53</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>17</td>
+      <td>1080.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2019-09-28 16:01:41</td>
+      <td>2024</td>
+      <td>상도역 1번출구</td>
+      <td>동작구</td>
+      <td>2019-09-28 17:20:44</td>
+      <td>2002</td>
+      <td>노들역 1번출구</td>
+      <td>78</td>
+      <td>13870.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-3c7175b9-9663-4f13-853a-cf086876397b')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-3c7175b9-9663-4f13-853a-cf086876397b button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-3c7175b9-9663-4f13-853a-cf086876397b');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+</section>
+<section id="id6">
+<h2>3. 구별 대여 횟수 비교<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<p>이제 구별로 자전거를 대여한 회수를 구해소 돗수 분포표를 구해보고 파이차트와 바차트로 비교해 봅시다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">gu_name_start</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>서초구     80773
+강남구     65964
+관악구     53201
+송파구     45516
+광진구     40502
+동작구     32726
+성동구     18678
+영등포구    13377
+강서구      7642
+구로구      7491
+용산구      6176
+강동구      5247
+마포구      4622
+동대문구     3968
+서대문구     3287
+금천구      2378
+중구       1733
+종로구      1374
+중랑구      1343
+성북구      1090
+양천구       701
+노원구       484
+은평구       351
+도봉구       102
+강북구       101
+Name: gu_name_start, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">gu_name_start</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc191cb590&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_28_1.png" src="../_images/distribution_exercise_01_28_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">gu_name_start</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc18c25e90&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_29_1.png" src="../_images/distribution_exercise_01_29_1.png" />
+</div>
+</div>
+</section>
+<section id="id7">
+<h2>4. 자전거 이용시간 및 거리 분석<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<p>이제 자전거 이용시간과 거리에 대한 시각화 분석과 요약 통계량을 구해봅시다.</p>
+<ol class="simple">
+<li><p>요약 통계량</p></li>
+<li><p>히스토그램</p></li>
+<li><p>상자그림</p></li>
+<li><p>이용 시간과 거리의 산점도</p></li>
+</ol>
+<p>자전거 이용 시간과 거리는 앞에서 말한 대로 체력 측정 자료의 분포와는 매우 다릅니다. 크기가 큰 방향, 즉 오른쪽으로 매우 치우친 분포를 보여줍니다.</p>
+<p>특히 이동 거리의 평균(mean)과 중간값(50%, median)이 매우 차이가 나는 것을 알 수 있습니다. 왜 이렇게 차이가 나는지 생각해 봅시다.</p>
+<p>이용 시간과 거리의 최대값을 보면 우리가 생각한 것 보다 매우 큰 값임을 알 수 있습니다. 실제로 이용한 시간과 거리일까요?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="p">[[</span><span class="s2">&quot;duration&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-c5b5add5-b13b-4087-9694-378a5d26075c">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>duration</th>
+      <th>distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>count</td>
+      <td>407589.000000</td>
+      <td>407589.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mean</td>
+      <td>30.156827</td>
+      <td>4253.336228</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>std</td>
+      <td>32.065934</td>
+      <td>5782.673901</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>min</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25%</td>
+      <td>8.000000</td>
+      <td>1200.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>50%</td>
+      <td>18.000000</td>
+      <td>2380.000000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>75%</td>
+      <td>43.000000</td>
+      <td>5130.000000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>max</td>
+      <td>2479.000000</td>
+      <td>153490.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-c5b5add5-b13b-4087-9694-378a5d26075c')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-c5b5add5-b13b-4087-9694-378a5d26075c button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-c5b5add5-b13b-4087-9694-378a5d26075c');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;duration&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc18b383d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_32_1.png" src="../_images/distribution_exercise_01_32_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;duration&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc18a7c410&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_33_1.png" src="../_images/distribution_exercise_01_33_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;distance&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc189fa110&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_34_1.png" src="../_images/distribution_exercise_01_34_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;distance&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc189331d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_35_1.png" src="../_images/distribution_exercise_01_35_1.png" />
+</div>
+</div>
+<p>아래 그림은 이동거리와 시간의 관계를 산점도로 나타낸 것입니다.</p>
+<p>이동거리와 이동시간이 매우 큰 값들이 나타나 있는 것을 알 수 있습니다.</p>
+<p>시각적으로 확실하게 나타나지는 않지만 이동시간이 증가하면 거리도 증가하는 경향이 나타납니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span> <span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc1889f990&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_37_1.png" src="../_images/distribution_exercise_01_37_1.png" />
+</div>
+</div>
+<p>이동시간(<code class="docutils literal notranslate"><span class="pre">duration</span></code>)과 이동거리(<code class="docutils literal notranslate"><span class="pre">distance</span></code>)의 분포는 오른쪽으로 매우 치우친 모양으로 나타납니다.</p>
+<p>이러한 현상은 비정상적으로 매우 큰 값들이 자료에 많이 포함되어 있기 때문입니다. 앞의 분포를 요약하는 그림에서 나타난 것과 같이 평균에서 멀리 떨어진 매우 큰 값들을 우리는 이상점(outlier)라고 부릅니다.</p>
+<p>이렇게 매우 큰 값들이 포함된 자료의 분포를 파악하는 경우 자료의 값을 로그 변환(log transformation)하여 분석하면 여러 가지 유용한 점이 있습니다.</p>
+<ul class="simple">
+<li><p>이동시간와 이동거리에 값이 0이 있는 자료가 있으므로 아주 작은 수 0.1을 더해서 로그변환 합니다.</p></li>
+<li><p>로그변환 시 밑을 10을 이용하며 함수는 <code class="docutils literal notranslate"><span class="pre">numpy</span></code> 에 있는 <code class="docutils literal notranslate"><span class="pre">log10</span></code> 함수를 사용합니다.</p></li>
+</ul>
+<p>이제 오른쪽으로 매우 치우친 분포를 가진 자료를 로그 변환하면 대칭인 분포가 나타나는 것을 알 수 잇습니다.</p>
+<p>이동 시간과 거리의  로그 변환값에 대한  산점도를 다시 그려봅시다.</p>
+<p>아래 코드를 실행하면 경고(warning)이 나타나지만 결과에는 이상이 없으니 그냥 무시하세요.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="p">[</span><span class="s1">&#39;duration_log10&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">bike_final</span><span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">bike_final</span><span class="p">[</span><span class="s1">&#39;distance_log10&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">bike_final</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;duration_log10&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span> <span class="s1">&#39;distance_log10&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc188396d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_41_1.png" src="../_images/distribution_exercise_01_41_1.png" />
+</div>
+</div>
+<p>위의 분석을 보면 거리가 0으로 된 자료가 많은 것 같습니다. 로그변환시 0.1을 더했으므로
+원래 값이 0 인 자료는 로그 변환시 -1 이 됩니다.</p>
+<div class="math notranslate nohighlight">
+\[ log_{10}(0+0.1) = log_{10}(0.1) = -1 \]</div>
+<p>아마도 거리를 측정하는 센서나 계측기계에 오류가 있는 것으로 생각되어 거리가 0인 것을 제외한 데이터프레임 <code class="docutils literal notranslate"><span class="pre">bike_nozero</span></code>를 만들고 다시 분석해 봅시다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_nozero</span> <span class="o">=</span> <span class="n">bike_final</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bike_final</span><span class="o">.</span><span class="n">distance</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_nozero</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(395277, 11)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(407589, 11)
+</pre></div>
+</div>
+</div>
+</div>
+<p>아래외 같이 이동거리가 0인 자료의 수는 12,312 입니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_final</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">bike_nozero</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12312
+</pre></div>
+</div>
+</div>
+</div>
+<p>이제 이동거리가 0인 자료를 제거하고 이동거리와 시간에 대한 요약통계량을 구해봅시다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_nozero</span><span class="p">[[</span><span class="s2">&quot;duration&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-33abdbcb-4dcd-4ecd-94d2-7afb3e2baa18">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>duration</th>
+      <th>distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>count</td>
+      <td>395277.000000</td>
+      <td>395277.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mean</td>
+      <td>30.285319</td>
+      <td>4385.818198</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>std</td>
+      <td>32.119792</td>
+      <td>5822.356670</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>min</td>
+      <td>1.000000</td>
+      <td>10.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>25%</td>
+      <td>9.000000</td>
+      <td>1290.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>50%</td>
+      <td>18.000000</td>
+      <td>2470.000000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>75%</td>
+      <td>43.000000</td>
+      <td>5280.000000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>max</td>
+      <td>2479.000000</td>
+      <td>153490.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-33abdbcb-4dcd-4ecd-94d2-7afb3e2baa18')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-33abdbcb-4dcd-4ecd-94d2-7afb3e2baa18 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-33abdbcb-4dcd-4ecd-94d2-7afb3e2baa18');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>또한 이동거리가 0인 자료를 제거하고  자료의 분포를 살펴봅시다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_nozero</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;distance&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc1e972750&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_51_1.png" src="../_images/distribution_exercise_01_51_1.png" />
+</div>
+</div>
+<p>로그 변환을 적용한 자료는 분포가 대칭에 가깝게 됩니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_nozero</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;distance_log10&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc1ea0d2d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_53_1.png" src="../_images/distribution_exercise_01_53_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_nozero</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;distance_log10&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc16e1b2d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_54_1.png" src="../_images/distribution_exercise_01_54_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_nozero</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;duration_log10&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span> <span class="s1">&#39;distance_log10&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc18a004d0&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_55_1.png" src="../_images/distribution_exercise_01_55_1.png" />
+</div>
+</div>
+</section>
+<section id="id8">
+<h2>5. 구별 자전거 이용시간 및 거리 비교<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<p>이제 구별로 자전거의 이용 시간과 거리를 비교해 봅시다. 여기서 구별로 분석하는 것은 자전거를 출발할 때 대여한 대여소가 위치는 구를 의미합니다.</p>
+<ol class="simple">
+<li><p>구별 요약 통계량 분석</p></li>
+<li><p>구별 상자그림</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_nozero</span><span class="p">[[</span><span class="s2">&quot;gu_name_start&quot;</span><span class="p">,</span> <span class="s2">&quot;duration&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;gu_name_start&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-74c5644e-5ffc-4e0a-9cbe-561ca8fc5bd4">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>gu_name_start</th>
+      <th colspan="8" halign="left">duration</th>
+      <th colspan="8" halign="left">distance</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>강남구</td>
+      <td>63820.0</td>
+      <td>29.363601</td>
+      <td>31.644264</td>
+      <td>1.0</td>
+      <td>8.0</td>
+      <td>17.0</td>
+      <td>41.00</td>
+      <td>911.0</td>
+      <td>63820.0</td>
+      <td>4059.047634</td>
+      <td>5534.558052</td>
+      <td>10.0</td>
+      <td>1210.0</td>
+      <td>2270.0</td>
+      <td>4840.0</td>
+      <td>125800.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>강동구</td>
+      <td>5113.0</td>
+      <td>36.461373</td>
+      <td>28.835377</td>
+      <td>3.0</td>
+      <td>15.0</td>
+      <td>29.0</td>
+      <td>49.00</td>
+      <td>385.0</td>
+      <td>5113.0</td>
+      <td>6063.827499</td>
+      <td>6125.705232</td>
+      <td>10.0</td>
+      <td>2350.0</td>
+      <td>4280.0</td>
+      <td>7930.0</td>
+      <td>91800.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>강북구</td>
+      <td>100.0</td>
+      <td>83.830000</td>
+      <td>42.500637</td>
+      <td>27.0</td>
+      <td>46.0</td>
+      <td>80.0</td>
+      <td>113.50</td>
+      <td>249.0</td>
+      <td>100.0</td>
+      <td>17964.200000</td>
+      <td>12087.323285</td>
+      <td>3830.0</td>
+      <td>10960.0</td>
+      <td>15515.0</td>
+      <td>21605.0</td>
+      <td>85350.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>강서구</td>
+      <td>7426.0</td>
+      <td>20.979127</td>
+      <td>28.844970</td>
+      <td>1.0</td>
+      <td>5.0</td>
+      <td>8.0</td>
+      <td>20.00</td>
+      <td>323.0</td>
+      <td>7426.0</td>
+      <td>3577.347159</td>
+      <td>6305.250982</td>
+      <td>10.0</td>
+      <td>880.0</td>
+      <td>1400.0</td>
+      <td>2510.0</td>
+      <td>80260.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>관악구</td>
+      <td>51741.0</td>
+      <td>24.730929</td>
+      <td>27.278189</td>
+      <td>1.0</td>
+      <td>8.0</td>
+      <td>14.0</td>
+      <td>31.00</td>
+      <td>468.0</td>
+      <td>51741.0</td>
+      <td>3653.434027</td>
+      <td>5440.731362</td>
+      <td>10.0</td>
+      <td>1210.0</td>
+      <td>2120.0</td>
+      <td>3700.0</td>
+      <td>116470.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>광진구</td>
+      <td>39251.0</td>
+      <td>24.207765</td>
+      <td>28.304476</td>
+      <td>1.0</td>
+      <td>7.0</td>
+      <td>13.0</td>
+      <td>31.00</td>
+      <td>845.0</td>
+      <td>39251.0</td>
+      <td>3158.712135</td>
+      <td>4668.621440</td>
+      <td>10.0</td>
+      <td>1030.0</td>
+      <td>1750.0</td>
+      <td>3310.0</td>
+      <td>87390.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>구로구</td>
+      <td>7311.0</td>
+      <td>30.576255</td>
+      <td>26.481543</td>
+      <td>1.0</td>
+      <td>15.0</td>
+      <td>25.0</td>
+      <td>39.00</td>
+      <td>982.0</td>
+      <td>7311.0</td>
+      <td>5391.278895</td>
+      <td>5357.453664</td>
+      <td>10.0</td>
+      <td>2510.0</td>
+      <td>4360.0</td>
+      <td>6635.0</td>
+      <td>83860.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>금천구</td>
+      <td>2332.0</td>
+      <td>32.106346</td>
+      <td>28.378665</td>
+      <td>2.0</td>
+      <td>12.0</td>
+      <td>25.0</td>
+      <td>43.00</td>
+      <td>221.0</td>
+      <td>2332.0</td>
+      <td>5468.975129</td>
+      <td>6374.993667</td>
+      <td>30.0</td>
+      <td>1720.0</td>
+      <td>3760.0</td>
+      <td>6302.5</td>
+      <td>74270.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>노원구</td>
+      <td>472.0</td>
+      <td>72.360169</td>
+      <td>33.208176</td>
+      <td>4.0</td>
+      <td>49.0</td>
+      <td>66.0</td>
+      <td>91.00</td>
+      <td>322.0</td>
+      <td>472.0</td>
+      <td>16101.588983</td>
+      <td>9319.765758</td>
+      <td>540.0</td>
+      <td>10970.0</td>
+      <td>13680.0</td>
+      <td>19607.5</td>
+      <td>106810.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>도봉구</td>
+      <td>97.0</td>
+      <td>92.474227</td>
+      <td>30.253820</td>
+      <td>5.0</td>
+      <td>69.0</td>
+      <td>92.0</td>
+      <td>113.00</td>
+      <td>172.0</td>
+      <td>97.0</td>
+      <td>19955.463918</td>
+      <td>9529.382524</td>
+      <td>840.0</td>
+      <td>15640.0</td>
+      <td>17710.0</td>
+      <td>22980.0</td>
+      <td>76560.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>동대문구</td>
+      <td>3872.0</td>
+      <td>30.242252</td>
+      <td>27.763908</td>
+      <td>1.0</td>
+      <td>10.0</td>
+      <td>20.0</td>
+      <td>43.00</td>
+      <td>321.0</td>
+      <td>3872.0</td>
+      <td>5352.430269</td>
+      <td>6044.206191</td>
+      <td>20.0</td>
+      <td>1570.0</td>
+      <td>3255.0</td>
+      <td>6690.0</td>
+      <td>74610.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>동작구</td>
+      <td>31662.0</td>
+      <td>28.978618</td>
+      <td>33.212139</td>
+      <td>1.0</td>
+      <td>7.0</td>
+      <td>15.0</td>
+      <td>41.00</td>
+      <td>865.0</td>
+      <td>31662.0</td>
+      <td>4085.054955</td>
+      <td>5972.909677</td>
+      <td>10.0</td>
+      <td>1110.0</td>
+      <td>2020.0</td>
+      <td>4680.0</td>
+      <td>99220.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>마포구</td>
+      <td>4515.0</td>
+      <td>48.507420</td>
+      <td>34.103671</td>
+      <td>2.0</td>
+      <td>20.0</td>
+      <td>43.0</td>
+      <td>67.00</td>
+      <td>378.0</td>
+      <td>4515.0</td>
+      <td>9267.145072</td>
+      <td>8266.710554</td>
+      <td>10.0</td>
+      <td>3020.0</td>
+      <td>7770.0</td>
+      <td>13060.0</td>
+      <td>83270.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>서대문구</td>
+      <td>3200.0</td>
+      <td>34.571875</td>
+      <td>37.740023</td>
+      <td>1.0</td>
+      <td>9.0</td>
+      <td>17.0</td>
+      <td>51.00</td>
+      <td>334.0</td>
+      <td>3200.0</td>
+      <td>5437.575000</td>
+      <td>7526.119536</td>
+      <td>10.0</td>
+      <td>1307.5</td>
+      <td>2470.0</td>
+      <td>6562.5</td>
+      <td>130150.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>서초구</td>
+      <td>78071.0</td>
+      <td>29.997349</td>
+      <td>34.510426</td>
+      <td>1.0</td>
+      <td>8.0</td>
+      <td>17.0</td>
+      <td>41.00</td>
+      <td>2457.0</td>
+      <td>78071.0</td>
+      <td>3994.706485</td>
+      <td>5511.477067</td>
+      <td>10.0</td>
+      <td>1200.0</td>
+      <td>2310.0</td>
+      <td>4710.0</td>
+      <td>141170.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>성동구</td>
+      <td>18148.0</td>
+      <td>35.458783</td>
+      <td>32.746608</td>
+      <td>1.0</td>
+      <td>11.0</td>
+      <td>25.0</td>
+      <td>51.00</td>
+      <td>772.0</td>
+      <td>18148.0</td>
+      <td>4839.608772</td>
+      <td>5503.083157</td>
+      <td>10.0</td>
+      <td>1540.0</td>
+      <td>3080.0</td>
+      <td>6300.0</td>
+      <td>103790.0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>성북구</td>
+      <td>1062.0</td>
+      <td>49.246704</td>
+      <td>32.445494</td>
+      <td>3.0</td>
+      <td>24.0</td>
+      <td>41.5</td>
+      <td>66.00</td>
+      <td>195.0</td>
+      <td>1062.0</td>
+      <td>9703.615819</td>
+      <td>7276.167526</td>
+      <td>90.0</td>
+      <td>4530.0</td>
+      <td>7725.0</td>
+      <td>14142.5</td>
+      <td>72550.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>송파구</td>
+      <td>44168.0</td>
+      <td>32.489653</td>
+      <td>31.268809</td>
+      <td>1.0</td>
+      <td>11.0</td>
+      <td>22.0</td>
+      <td>45.00</td>
+      <td>1620.0</td>
+      <td>44168.0</td>
+      <td>4511.664327</td>
+      <td>5625.220158</td>
+      <td>10.0</td>
+      <td>1550.0</td>
+      <td>2850.0</td>
+      <td>5500.0</td>
+      <td>153490.0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>양천구</td>
+      <td>692.0</td>
+      <td>57.137283</td>
+      <td>29.549682</td>
+      <td>4.0</td>
+      <td>38.0</td>
+      <td>50.0</td>
+      <td>70.00</td>
+      <td>264.0</td>
+      <td>692.0</td>
+      <td>12011.358382</td>
+      <td>8506.135652</td>
+      <td>800.0</td>
+      <td>8072.5</td>
+      <td>10385.0</td>
+      <td>13665.0</td>
+      <td>108870.0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>영등포구</td>
+      <td>13036.0</td>
+      <td>43.814744</td>
+      <td>30.983401</td>
+      <td>1.0</td>
+      <td>21.0</td>
+      <td>38.0</td>
+      <td>57.00</td>
+      <td>536.0</td>
+      <td>13036.0</td>
+      <td>7582.325867</td>
+      <td>6780.598739</td>
+      <td>10.0</td>
+      <td>3400.0</td>
+      <td>6220.0</td>
+      <td>9850.0</td>
+      <td>100740.0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>용산구</td>
+      <td>6013.0</td>
+      <td>45.312323</td>
+      <td>28.544585</td>
+      <td>1.0</td>
+      <td>25.0</td>
+      <td>39.0</td>
+      <td>56.00</td>
+      <td>346.0</td>
+      <td>6013.0</td>
+      <td>7153.838350</td>
+      <td>6014.478033</td>
+      <td>10.0</td>
+      <td>3920.0</td>
+      <td>5920.0</td>
+      <td>8470.0</td>
+      <td>84750.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>은평구</td>
+      <td>342.0</td>
+      <td>50.675439</td>
+      <td>35.505027</td>
+      <td>3.0</td>
+      <td>21.0</td>
+      <td>41.5</td>
+      <td>80.75</td>
+      <td>153.0</td>
+      <td>342.0</td>
+      <td>10146.988304</td>
+      <td>9772.512231</td>
+      <td>550.0</td>
+      <td>2992.5</td>
+      <td>6105.0</td>
+      <td>18015.0</td>
+      <td>81280.0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>종로구</td>
+      <td>1345.0</td>
+      <td>44.176208</td>
+      <td>35.738210</td>
+      <td>1.0</td>
+      <td>19.0</td>
+      <td>35.0</td>
+      <td>58.00</td>
+      <td>533.0</td>
+      <td>1345.0</td>
+      <td>7298.869888</td>
+      <td>6978.688577</td>
+      <td>450.0</td>
+      <td>2870.0</td>
+      <td>5600.0</td>
+      <td>9670.0</td>
+      <td>97250.0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>중구</td>
+      <td>1700.0</td>
+      <td>40.721176</td>
+      <td>34.513314</td>
+      <td>1.0</td>
+      <td>14.0</td>
+      <td>34.0</td>
+      <td>56.00</td>
+      <td>505.0</td>
+      <td>1700.0</td>
+      <td>6760.147059</td>
+      <td>6858.953106</td>
+      <td>10.0</td>
+      <td>1960.0</td>
+      <td>5380.0</td>
+      <td>9270.0</td>
+      <td>80650.0</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>중랑구</td>
+      <td>1314.0</td>
+      <td>43.770167</td>
+      <td>72.627494</td>
+      <td>2.0</td>
+      <td>21.0</td>
+      <td>36.0</td>
+      <td>55.00</td>
+      <td>2479.0</td>
+      <td>1314.0</td>
+      <td>8232.998478</td>
+      <td>7564.875602</td>
+      <td>430.0</td>
+      <td>3672.5</td>
+      <td>6350.0</td>
+      <td>10027.5</td>
+      <td>69370.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-74c5644e-5ffc-4e0a-9cbe-561ca8fc5bd4')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-74c5644e-5ffc-4e0a-9cbe-561ca8fc5bd4 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-74c5644e-5ffc-4e0a-9cbe-561ca8fc5bd4');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">bike_nozero</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span> <span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;gu_name_start&#39;</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc12c3b190&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_58_1.png" src="../_images/distribution_exercise_01_58_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">bike_nozero</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span> <span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;gu_name_start&#39;</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc1296f890&gt;
+</pre></div>
+</div>
+<img alt="../_images/distribution_exercise_01_59_1.png" src="../_images/distribution_exercise_01_59_1.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="dataframe_exercise_02.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Pandas 데이터프레임 연습 2</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../hw.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">과제 해딥 노트북</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 서울시립대학교<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
