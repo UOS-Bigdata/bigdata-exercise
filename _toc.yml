@@ -8,6 +8,7 @@ chapters:
   - file: notes/dataframe_exercise_01 
   - file: notes/dataframe_exercise_02
   - file: notes/distribution_exercise_01
+  - file: notes/distribution_exercise_02
 - file: hw 
   sections:
   - file: notes/hw-01-ans
