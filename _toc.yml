@@ -3,17 +3,17 @@
 format: jb-book
 root: intro
 chapters:
-- file: exercise  
-  sections:
-  - file: notes/midterm-summary-2022F
-  - file: notes/dataframe_exercise_01 
-  - file: notes/dataframe_exercise_02
-  - file: notes/distribution_exercise_01
-  - file: notes/distribution_exercise_02
-  - file: notes/conditional-loop-exercise
-- file: hw 
-  sections:
-  - file: notes/hw-01-ans
-  - file: notes/hw-02-ans
-  - file: notes/hw-03-ans
-
+  - file: exercise
+    sections:
+      - file: notes/midterm-summary-2022F
+      - file: notes/dataframe_exercise_01
+      - file: notes/dataframe_exercise_02
+      - file: notes/distribution_exercise_01
+      - file: notes/distribution_exercise_02
+      - file: notes/conditional-loop-exercise
+  - file: hw
+    sections:
+      - file: notes/hw-01-ans
+      - file: notes/hw-02-ans
+      - file: notes/hw-03-ans
+      - file: notes/hw-04-ans
