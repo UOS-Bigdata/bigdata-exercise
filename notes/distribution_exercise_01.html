@@ -1,48 +1,59 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>자료의 분포 - 시각화와 요약 통계량 - 연습 &#8212; 빅데이터 개론 2 - 연습 노트북과 과제 해답</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,61 +63,93 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/distribution_exercise_01';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="자료의 분포 연습: 요약 통계량의 정의, 정규분포" href="distribution_exercise_02.html" />
     <link rel="prev" title="Pandas 데이터프레임 연습 2" href="dataframe_exercise_02.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">빅데이터 개론 2 - 연습 노트북과 과제 해답</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -116,377 +159,232 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../exercise.html">
-   연습노트북
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="midterm-summary-2022F.html">
-     빅데이터개론2 - 중간고사의 범위와 요약
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="dataframe_exercise_01.html">
-     Pandas 데이터프레임 연습 1
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="dataframe_exercise_02.html">
-     Pandas 데이터프레임 연습 2
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     자료의 분포 - 시각화와 요약 통계량 - 연습
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="distribution_exercise_02.html">
-     자료의 분포 연습:  요약 통계량의 정의, 정규분포
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="conditional-loop-exercise.html">
-     조건문과 반복문 연습 노트북
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../hw.html">
-   과제 해딥 노트북
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="hw-01-ans.html">
-     빅데이터개론2 과제 1 - 답안
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="hw-02-ans.html">
-     빅데이터개론2 과제 2
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="hw-03-ans.html">
-     빅데이터개론2  과제 3
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="hw-04-ans.html">
-     빅데이터개론2 과제 4
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../exercise.html">연습노트북</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dataframe_exercise_01.html">Pandas 데이터프레임 연습 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dataframe_exercise_02.html">Pandas 데이터프레임 연습 2</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">자료의 분포 - 시각화와 요약 통계량 - 연습</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distribution_exercise_02.html">자료의 분포 연습:  요약 통계량의 정의, 정규분포</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conditional-loop-exercise.html">조건문과 반복문 연습 노트북</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../hw.html">과제 해딥 노트북</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="hw_2023S_ans.html">빅데이터개론2 과제 1</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/UOS-Bigdata/bigdata-exercise/master?urlpath=tree/notes/distribution_exercise_01.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
   
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
+  <div id="rtd-footer-container"></div>
 
-      </li>
+
+      </div>
       
-      <li>
-        <a href="https://colab.research.google.com/github/UOS-Bigdata/bigdata-exercise/blob/master/notes/distribution_exercise_01.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/UOS-Bigdata/bigdata-exercise/blob/master/notes/distribution_exercise_01.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   
     <img src="../_static/images/logo_colab.png">
   </span>
-<span class="headerbtn__text-container">Colab</span>
+<span class="btn__text-container">Colab</span>
 </a>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
 
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+
+
+<a href="https://github.com/UOS-Bigdata/bigdata-exercise" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-<a href="https://github.com/UOS-Bigdata/bigdata-exercise"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="bottom"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fab fa-github"></i>
   </span>
 
 </a>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/notes/distribution_exercise_01.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/distribution_exercise_01.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.ipynb</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
-
-      </li>
+</li>
+      
+      
+      
       
       <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-file-pdf"></i>
   </span>
-<span class="headerbtn__text-container">.pdf</span>
+<span class="btn__text-container">.pdf</span>
 </button>
-
-      </li>
+</li>
       
-    </ul>
-  </div>
+  </ul>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
   </span>
 
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
-   1. 자료불러오기
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     서울시 공공 자전거 대여 이력 자료 불러 오기
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     서울시 공공 자전거 대여소 정보 자료 불러오기
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   2. 자료의 결합
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id6">
-   3. 구별 대여 횟수 비교
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id7">
-   4. 자전거 이용시간 및 거리 분석
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   5. 구별 자전거 이용시간 및 거리 비교
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>자료의 분포 - 시각화와 요약 통계량 - 연습</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
-   1. 자료불러오기
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     서울시 공공 자전거 대여 이력 자료 불러 오기
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     서울시 공공 자전거 대여소 정보 자료 불러오기
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   2. 자료의 결합
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id6">
-   3. 구별 대여 횟수 비교
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id7">
-   4. 자전거 이용시간 및 거리 분석
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   5. 구별 자전거 이용시간 및 거리 비교
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>자료의 분포 - 시각화와 요약 통계량 - 연습</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 자료불러오기</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">서울시 공공 자전거 대여 이력 자료 불러 오기</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">서울시 공공 자전거 대여소 정보 자료 불러오기</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2. 자료의 결합</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3. 구별 대여 횟수 비교</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">4. 자전거 이용시간 및 거리 분석</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">5. 구별 자전거 이용시간 및 거리 비교</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>자료의 분포 - 시각화와 요약 통계량 - 연습<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1>자료의 분포 - 시각화와 요약 통계량 - 연습<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>이 노트북은 자료의 분포에 대한 시각화를 이용한 탐색적 분석과 요약 통계량을 구하는 연습입니다.</p>
 <p>교과서에서 본 체력 측정자료에서 우리가 공부한 키, 몸무게와 같은 자료는 평균을 중심으로 대칭인 분포를 가지는 자료입니다.</p>
 <p>이번 연습에 사용될 자료는 서울특별시 공공자전거 대여 <a class="reference external" href="https://data.seoul.go.kr/dataList/OA-20447/A/1/datasetView.do">이력 자료</a>를 이용할 것입니다. <strong>분석할 변수는 자전거 이용 시간(<code class="docutils literal notranslate"><span class="pre">duration</span></code>, 분)과 거리(<code class="docutils literal notranslate"><span class="pre">distance</span></code>, m)</strong> 입니다. 시간과 거리의 분포는 체력 자료와 매우 다른 분포를 가지는 것을 볼 수 있습니다.</p>
@@ -519,16 +417,16 @@ title="Print to PDF"
 </div>
 </div>
 <section id="id2">
-<h2>1. 자료불러오기<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>자료는 두 개의 화일로 구성됩니다. 자료는 <a class="reference external" href="https://data.seoul.go.kr/dataList/OA-15182/F/1/datasetView.do">서울시 열린데이터 광장 사이트</a>에서 다운로드받은 자료입니다.</p>
+<h2>1. 자료불러오기<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>자료는 두 개의 화일로 구성됩니다. 자료는 <a class="reference external" href="https://data.seoul.go.kr/dataList/OA-15182/F/1/datasetView.do#">서울시 열린데이터 광장 사이트</a>에서 다운로드받은 자료입니다.</p>
 <ul class="simple">
 <li><p>서울시 공공 자전거 대여 이력 자료(2019년 9월 한달 자료)</p></li>
 <li><p>서울시 공공 자전거 대여소 정보 자료 (2021년 6월의 대여서 현황자료)</p></li>
 </ul>
 <p><strong>참고</strong>: 최근 2020년 자료도 있지만 자료의 크기가 다소 크기 때문에 <code class="docutils literal notranslate"><span class="pre">colab</span></code> 을 이용할 시 시간이 오래 걸립니다. 관심있는 사람들은 최근자료를 다운로드 받아 아래 제시된 코드를 이용하여 실습해보세요.</p>
 <section id="id3">
-<h3>서울시 공공 자전거 대여 이력 자료 불러 오기<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
-<ol class="simple">
+<h3>서울시 공공 자전거 대여 이력 자료 불러 오기<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>먼저 서울시 공공 자전거 대여 이력 자료를 불러 들여 데이터프레임 <code class="docutils literal notranslate"><span class="pre">bike0</span></code> 에 저장</p></li>
 <li><p>열이름을 영문으로 바꾸고 열이름에 대한 정보를 가진 데이터프레임 <code class="docutils literal notranslate"><span class="pre">col_info</span></code>를 생성</p></li>
 <li><p>대여시간에 대한 두 개의 변수를 시간 변수로 변환</p></li>
@@ -729,14 +627,14 @@ title="Print to PDF"
       <button class="colab-df-convert" onclick="convertToInteractive('df-bdcf7395-78e2-4977-aa4f-8d3d1dc678e7')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -801,7 +699,7 @@ title="Print to PDF"
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -947,14 +845,14 @@ dtype: object
       <button class="colab-df-convert" onclick="convertToInteractive('df-351724ef-c435-4379-931e-92006403fdde')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -1019,7 +917,7 @@ dtype: object
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1220,14 +1118,14 @@ dtype: object
       <button class="colab-df-convert" onclick="convertToInteractive('df-18942f1a-1796-4c48-945e-3bd02030bbb4')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -1292,7 +1190,7 @@ dtype: object
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1319,7 +1217,7 @@ dtype: object
 </div>
 </section>
 <section id="id4">
-<h3>서울시 공공 자전거 대여소 정보 자료 불러오기<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<h3>서울시 공공 자전거 대여소 정보 자료 불러오기<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p>대여소 정보를 가진 자료(<code class="docutils literal notranslate"><span class="pre">seoul_bike_stations_202106.csv</span></code>)에는 대여소의 ID, 대여소 이름과 대여소가 있는 주소와 공간적 위치에 대한 정보로 구성되어 있습니다.</p>
 <p>자료는 <a class="reference external" href="https://data.seoul.go.kr/dataList/OA-13252/F/1/datasetView.do">서울시 열린데이터 광장 사이트</a>에서 다운로드 받은 자료입니다. 최근 자료도 다운로드 받을 수 있습니다.</p>
 <div class="cell docutils container">
@@ -1507,14 +1405,14 @@ dtype: object
       <button class="colab-df-convert" onclick="convertToInteractive('df-c95ce2b2-db06-4101-b689-a264a26da352')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -1579,7 +1477,7 @@ dtype: object
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1594,7 +1492,7 @@ dtype: object
 </div>
 </div>
 <p>이제 대여소에 대한 정보가 있는 데이터프레임에 다음과 같은 작업을 적용하여 필요한 자료만 슬라이싱합니다.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>대여소 ID 와 행정구 이름, 2개의 열(열의 index는 0 과 2)을 선택하고 열이름을 영문으로 변경합니다.</p></li>
 <li><p>결과를 데이터프레임 <code class="docutils literal notranslate"><span class="pre">bike_station0</span></code> 으로 저장합니다.</p></li>
 </ol>
@@ -1701,14 +1599,14 @@ dtype: object
       <button class="colab-df-convert" onclick="convertToInteractive('df-b02ef513-49bf-4c9d-9072-b36a0d83c1f4')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -1773,13 +1671,13 @@ dtype: object
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 </section>
 </section>
 <section id="id5">
-<h2>2. 자료의 결합<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<ol class="simple">
+<h2>2. 자료의 결합<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
 <li><p>이제 공공자전거 대여 이력 정보를 가진 데이터프레임(<code class="docutils literal notranslate"><span class="pre">bike0</span></code>)와 대여소의 정보를 가진 데이터프레임(<code class="docutils literal notranslate"><span class="pre">bike_station0</span></code>)을 대여소(<code class="docutils literal notranslate"><span class="pre">station_ID_start</span></code>)를 기준으로 결합(merger)하여 새로운 데이터프레임 <code class="docutils literal notranslate"><span class="pre">bike1</span></code>을 만듭니다.</p></li>
 <li><p>필요한 변수만 선택하여 분석을 위한 최종 데이터프레임 <code class="docutils literal notranslate"><span class="pre">bike_final</span></code>를 만듭니다.</p></li>
 </ol>
@@ -1957,14 +1855,14 @@ dtype: object
       <button class="colab-df-convert" onclick="convertToInteractive('df-3c7175b9-9663-4f13-853a-cf086876397b')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2029,11 +1927,11 @@ dtype: object
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 </section>
 <section id="id6">
-<h2>3. 구별 대여 횟수 비교<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<h2>3. 구별 대여 횟수 비교<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <p>이제 구별로 자전거를 대여한 회수를 구해소 돗수 분포표를 구해보고 파이차트와 바차트로 비교해 봅시다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2082,7 +1980,7 @@ Name: gu_name_start, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc191cb590&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_28_1.png" src="../_images/distribution_exercise_01_28_1.png" />
+<img alt="../_images/9a9d0c278c879ab563421d75dd4a532efa633442be69dfc828b30588bbe1e1e1.png" src="../_images/9a9d0c278c879ab563421d75dd4a532efa633442be69dfc828b30588bbe1e1e1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2095,14 +1993,14 @@ Name: gu_name_start, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc18c25e90&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_29_1.png" src="../_images/distribution_exercise_01_29_1.png" />
+<img alt="../_images/2a557ff30bdb74fb3a23fce06cca376977c9b8813b9defb79c80a2c345d777a3.png" src="../_images/2a557ff30bdb74fb3a23fce06cca376977c9b8813b9defb79c80a2c345d777a3.png" />
 </div>
 </div>
 </section>
 <section id="id7">
-<h2>4. 자전거 이용시간 및 거리 분석<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<h2>4. 자전거 이용시간 및 거리 분석<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <p>이제 자전거 이용시간과 거리에 대한 시각화 분석과 요약 통계량을 구해봅시다.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>요약 통계량</p></li>
 <li><p>히스토그램</p></li>
 <li><p>상자그림</p></li>
@@ -2199,14 +2097,14 @@ Name: gu_name_start, dtype: int64
       <button class="colab-df-convert" onclick="convertToInteractive('df-c5b5add5-b13b-4087-9694-378a5d26075c')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2271,7 +2169,7 @@ Name: gu_name_start, dtype: int64
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2283,7 +2181,7 @@ Name: gu_name_start, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc18b383d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_32_1.png" src="../_images/distribution_exercise_01_32_1.png" />
+<img alt="../_images/8347d4623e527266665bd08d9cfab792cb06c4f6203cd91822b8a350735eb7a3.png" src="../_images/8347d4623e527266665bd08d9cfab792cb06c4f6203cd91822b8a350735eb7a3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2296,7 +2194,7 @@ Name: gu_name_start, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc18a7c410&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_33_1.png" src="../_images/distribution_exercise_01_33_1.png" />
+<img alt="../_images/e7049959d3582975e502ae3a9273d7eb1a59e6adb4d83c24c9c5bc244b40660b.png" src="../_images/e7049959d3582975e502ae3a9273d7eb1a59e6adb4d83c24c9c5bc244b40660b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2309,7 +2207,7 @@ Name: gu_name_start, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc189fa110&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_34_1.png" src="../_images/distribution_exercise_01_34_1.png" />
+<img alt="../_images/1bfe0674f873ddc7ab7f0a73adef410162a43c7a2fdead49231f9a3b8c08cae5.png" src="../_images/1bfe0674f873ddc7ab7f0a73adef410162a43c7a2fdead49231f9a3b8c08cae5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2322,7 +2220,7 @@ Name: gu_name_start, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc189331d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_35_1.png" src="../_images/distribution_exercise_01_35_1.png" />
+<img alt="../_images/4ec110b3f64d8033bc5e09a9af1edcf9b22489ac26ce40a7e6b5b139334bb6ed.png" src="../_images/4ec110b3f64d8033bc5e09a9af1edcf9b22489ac26ce40a7e6b5b139334bb6ed.png" />
 </div>
 </div>
 <p>아래 그림은 이동거리와 시간의 관계를 산점도로 나타낸 것입니다.</p>
@@ -2338,7 +2236,7 @@ Name: gu_name_start, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc1889f990&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_37_1.png" src="../_images/distribution_exercise_01_37_1.png" />
+<img alt="../_images/73a9c9eedceb9d1473e9229a2eb32682024142ed5e8ddd205b246052430ecf80.png" src="../_images/73a9c9eedceb9d1473e9229a2eb32682024142ed5e8ddd205b246052430ecf80.png" />
 </div>
 </div>
 <p>이동시간(<code class="docutils literal notranslate"><span class="pre">duration</span></code>)과 이동거리(<code class="docutils literal notranslate"><span class="pre">distance</span></code>)의 분포는 오른쪽으로 매우 치우친 모양으로 나타납니다.</p>
@@ -2385,7 +2283,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc188396d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_41_1.png" src="../_images/distribution_exercise_01_41_1.png" />
+<img alt="../_images/d79faa503774d90801aa8b6bc92b062e8db06a7937105baa45d458213abbdc74.png" src="../_images/d79faa503774d90801aa8b6bc92b062e8db06a7937105baa45d458213abbdc74.png" />
 </div>
 </div>
 <p>위의 분석을 보면 거리가 0으로 된 자료가 많은 것 같습니다. 로그변환시 0.1을 더했으므로
@@ -2526,14 +2424,14 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
       <button class="colab-df-convert" onclick="convertToInteractive('df-33abdbcb-4dcd-4ecd-94d2-7afb3e2baa18')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2598,7 +2496,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>또한 이동거리가 0인 자료를 제거하고  자료의 분포를 살펴봅시다.</p>
 <div class="cell docutils container">
@@ -2611,7 +2509,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc1e972750&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_51_1.png" src="../_images/distribution_exercise_01_51_1.png" />
+<img alt="../_images/4403b66094f56cc9210e1953c895944535e29cf12ae7bd47ab60771138533a43.png" src="../_images/4403b66094f56cc9210e1953c895944535e29cf12ae7bd47ab60771138533a43.png" />
 </div>
 </div>
 <p>로그 변환을 적용한 자료는 분포가 대칭에 가깝게 됩니다.</p>
@@ -2625,7 +2523,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc1ea0d2d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_53_1.png" src="../_images/distribution_exercise_01_53_1.png" />
+<img alt="../_images/6d7a2990b40a7a63682caa3aeb68bdf503e11368388fae4954e2d73bfb581025.png" src="../_images/6d7a2990b40a7a63682caa3aeb68bdf503e11368388fae4954e2d73bfb581025.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2638,7 +2536,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc16e1b2d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_54_1.png" src="../_images/distribution_exercise_01_54_1.png" />
+<img alt="../_images/6e360bd23381f2749661d4fdcfa279ff35feeaef447f627bdff6d04ef6950f9a.png" src="../_images/6e360bd23381f2749661d4fdcfa279ff35feeaef447f627bdff6d04ef6950f9a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2651,14 +2549,14 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc18a004d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_55_1.png" src="../_images/distribution_exercise_01_55_1.png" />
+<img alt="../_images/d511078b593e649c7f84c7145c402d8ecda87a32ec246764ef67bd71291d3f4a.png" src="../_images/d511078b593e649c7f84c7145c402d8ecda87a32ec246764ef67bd71291d3f4a.png" />
 </div>
 </div>
 </section>
 <section id="id8">
-<h2>5. 구별 자전거 이용시간 및 거리 비교<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<h2>5. 구별 자전거 이용시간 및 거리 비교<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <p>이제 구별로 자전거의 이용 시간과 거리를 비교해 봅시다. 여기서 구별로 분석하는 것은 자전거를 출발할 때 대여한 대여소가 위치는 구를 의미합니다.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>구별 요약 통계량 분석</p></li>
 <li><p>구별 상자그림</p></li>
 </ol>
@@ -3222,14 +3120,14 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
       <button class="colab-df-convert" onclick="convertToInteractive('df-74c5644e-5ffc-4e0a-9cbe-561ca8fc5bd4')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -3294,7 +3192,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3306,7 +3204,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc12c3b190&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_58_1.png" src="../_images/distribution_exercise_01_58_1.png" />
+<img alt="../_images/8ef5f5568f6800d194a833a49adaeb1e56d445dab417506e689a736f0c312c10.png" src="../_images/8ef5f5568f6800d194a833a49adaeb1e56d445dab417506e689a736f0c312c10.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -3319,7 +3217,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fcc1296f890&gt;
 </pre></div>
 </div>
-<img alt="../_images/distribution_exercise_01_59_1.png" src="../_images/distribution_exercise_01_59_1.png" />
+<img alt="../_images/cd728a8d4d4aa8edf181682eeb1bd9bb0e258630738f7e2aa1cbcfc2535478fc.png" src="../_images/cd728a8d4d4aa8edf181682eeb1bd9bb0e258630738f7e2aa1cbcfc2535478fc.png" />
 </div>
 </div>
 </section>
@@ -3337,7 +3235,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./notes"
         },
         predefinedOutput: true
@@ -3345,50 +3243,113 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="dataframe_exercise_02.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Pandas 데이터프레임 연습 2</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="dataframe_exercise_02.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pandas 데이터프레임 연습 2</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="distribution_exercise_02.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="distribution_exercise_02.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">자료의 분포 연습:  요약 통계량의 정의, 정규분포</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By 서울시립대학교<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 자료불러오기</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">서울시 공공 자전거 대여 이력 자료 불러 오기</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">서울시 공공 자전거 대여소 정보 자료 불러오기</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2. 자료의 결합</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3. 구별 대여 횟수 비교</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">4. 자전거 이용시간 및 거리 분석</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">5. 구별 자전거 이용시간 및 거리 비교</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 서울시립대학교
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
