@@ -10,9 +10,3 @@ chapters:
       - file: notes/distribution_exercise_01
       - file: notes/distribution_exercise_02
       - file: notes/conditional-loop-exercise
-  - file: hw
-    sections:
-      - file: notes/hw_2023S_ans
-      - file: notes/bigdata2_2023S_hw_02_ans
-      - file: notes/bigdata2_2023S_hw_03_ans
-      - file: notes/bigdata2_2023S_hw_04_ans
