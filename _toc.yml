@@ -10,3 +10,4 @@ chapters:
       - file: notes/distribution_exercise_01
       - file: notes/distribution_exercise_02
       - file: notes/conditional-loop-exercise
+  - file: data_access    
