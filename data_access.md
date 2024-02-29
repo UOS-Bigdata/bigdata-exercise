@@ -6,7 +6,7 @@
 ## 데이터 화일
 
 - [고속열차 수송 자료](./data/train-data-01.csv)
-- [한국의 가구수 자료](./korea_house_data_01/.csv)
+- [한국의 가구수 자료](./data/korea_house_data_01.csv)
 - [한국의 인구수 자료](./data/korea_population_data_01.csv)
 - [공공 자전거 자료](./data/seoul_bike_201909_3.csv)
 - [서울 기온과 강수량 자료](./data/weather_stats.csv)
